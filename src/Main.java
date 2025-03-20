@@ -22,5 +22,6 @@ public class Main {
         System.out.println("File content: " + content);
 
         scanner.close();
+        scanner.close();
     }
 }
