@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("Hello Canarys: ");
+        System.out.println("Welcome to Canarys: ");
         String name = scanner.nextLine();
 
         // Use Greeter class
