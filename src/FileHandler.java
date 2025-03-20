@@ -26,5 +26,6 @@ public class FileHandler {
             System.err.println("Error reading file: " + e.getMessage());
         }
         return content.toString();
+        return content.toString();
     }
 }
