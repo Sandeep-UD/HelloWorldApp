@@ -10,6 +10,6 @@ public class Greeter {
 
     // Method to generate greeting message
     public String sayHello() {
-        return "Hello, " + name + "! Welcome to Canarys.";
+        return "Hello, " + name + "! Solution is our Mantra.";
     }
 }
