@@ -1,16 +1,11 @@
-name: Hello World on Self-Hosted Runner
+name: Test Self-Hosted Runner
 
-on:
-  push:
-    branches:
-      - main
+on: 
+  push
 
 jobs:
-  hello-world:
-    runs-on: self-hosted  # This tells GitHub Actions to use your self-hosted runner
+  test:
+    runs-on: self-hosted  # Uses your self-hosted runner
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Say Hello
-        run: echo "Hello, World! Running on a self-hosted Linux runner!"
+        run: echo "Hello, World! Self-hosted runner is working!"
