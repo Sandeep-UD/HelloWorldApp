@@ -7,5 +7,5 @@ jobs:
   test:
     runs-on: self-hosted  # Uses your self-hosted runner
     steps:
-      - name: Say Hello
+      - name: Say Hello to me
         run: hostname
