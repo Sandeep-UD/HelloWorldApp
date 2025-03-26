@@ -33,7 +33,14 @@ pipeline {
                 // GitHub status check: Pending
                 githubNotify context: 'Build', status: 'PENDING', description: 'Building project'
 
-                sh 'javac src/*.java -d out'  // Compile all Java files into the `out` directory
+                // Cross-platform build commands
+                script {
+                    if (isUnix()) {
+                        sh 'javac src/*.java -d out'  // Linux/Unix: Compile Java files
+                    } else {
+                        bat 'mvn clean install'       // Windows: Maven build
+                    }
+                }
             }
             post {
                 success {
@@ -52,14 +59,20 @@ pipeline {
                 // GitHub status check: Pending
                 githubNotify context: 'Test', status: 'PENDING', description: 'Running tests'
 
-                sh '''
-                if [ -d "out" ]; then
-                    java -cp out Main
-                else
-                    echo "No compiled classes found!"
-                    exit 1
-                fi
-                '''
+                script {
+                    if (isUnix()) {
+                        sh '''
+                        if [ -d "out" ]; then
+                            java -cp out Main
+                        else
+                            echo "No compiled classes found!"
+                            exit 1
+                        fi
+                        '''
+                    } else {
+                        bat 'mvn test'   // Windows test execution
+                    }
+                }
             }
             post {
                 success {
@@ -73,25 +86,17 @@ pipeline {
 
         stage('Archive Artifacts') {
             steps {
-                echo 'Archiving build artifacts...'
-                archiveArtifacts artifacts: 'out/*.class', fingerprint: true
-            }
-        }
-
-        stage('Clean Up') {
-            steps {
-                echo 'Cleaning workspace...'
-                cleanWs()
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Build succeeded!'
         }
         failure {
-            echo 'Pipeline failed!'
+            echo 'Build failed!'
         }
     }
 }
