@@ -1,6 +1,3 @@
 [submodule "BootCamp-Demo"]
 	path = BootCamp-Demo
 	url = https://github.com/Rajesh-playground/BootCamp-Demo.git
-[submodule "Submodules"]
-	path = Submodules
-	url = https://github.com/Rajesh-playground/Submodules.git
